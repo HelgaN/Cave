@@ -14,6 +14,64 @@ $user_avatar = 'img/user.jpg';
 </head>
 <body>
 
+<?php
+  $categories = ["Доски и лыжи", "Крепления", "Ботинки", "Одежда", "Инструменты", "Разное"];
+
+  $item1 = [
+      "name" => "2014 Rossignol District Snowboard",
+      "category" => "Доски и лыжи",
+      "price" => "10999",
+      "url" => "img/lot-1.jpg"
+  ];
+
+  $item2 = [
+      "name" => "DC Ply Mens 2016/2017 Snowboard",
+      "category" => "Доски и лыжи",
+      "price" => "159999",
+      "url" => "img/lot-2.jpg"
+  ];
+
+  $item3 = [
+      "name" => "Крепления Union Contact Pro 2015 года размер L/XL",
+      "category" => "Крепления",
+      "price" => "8000",
+      "url" => "img/lot-3.jpg"
+  ];
+
+  $item4 = [
+      "name" => "Ботинки для сноуборда DC Mutiny Charocal",
+      "category" => "Ботинки",
+      "price" => "10999",
+      "url" => "img/lot-4.jpg"
+  ];
+
+  $item5 = [
+      "name" => "Куртка для сноуборда DC Mutiny Charocal",
+      "category" => "Одежда",
+      "price" => "7500",
+      "url" => "img/lot-5.jpg"
+  ];
+
+  $item6 = [
+      "name" => "Маска Oakley Canopy",
+      "category" => "Разное",
+      "price" => "5400",
+      "url" => "img/lot-6.jpg"
+  ];
+
+  $list = [$item1, $item2, $item3, $item4, $item5, $item6];
+
+  function formatNumber($number) {
+      $num = ceil($number);
+      if ($num > 1000) {
+          $num = number_format($num, 0, ".", " ");
+      }
+
+      $num . "&#8399";
+      return $num;
+  }
+?>
+
 <header class="main-header">
     <div class="main-header__container container">
         <h1 class="visually-hidden">YetiCave</h1>
@@ -29,6 +87,14 @@ $user_avatar = 'img/user.jpg';
         <nav class="user-menu">
 
         <!-- здесь должен быть PHP код для показа аватара пользователя -->
+            <?php if($is_auth): ?>
+              <div class="user-menu__image">
+                  <img src="<?= $user_avatar ?>" width="40" height="40" alt="Пользователь">
+              </div>
+              <div class="user-menu__logged">
+                  <p><?= $user_name ?></p>
+              </div>
+            <?php endif; ?>
 
         </nav>
     </div>
@@ -64,7 +130,40 @@ $user_avatar = 'img/user.jpg';
             <h2>Открытые лоты</h2>
         </div>
         <ul class="lots__list">
-            <li class="lots__item lot">
+            <?php
+              $index = 0;
+              $num = count($list);
+
+              while ($index < $num) {
+                  $name = $list[$index]["name"];
+                  $category = $list[$index]["category"];
+                  $price = $list[$index]["price"];
+                  $url = $list[$index]["url"];
+
+                  print ( "
+                      <li class=\"lots__item lot\">
+                <div class=\"lot__image\">
+                    <img src=" . $url . " width=\"350\" height=\"260\" alt=\"" . $name . "\">
+                </div>
+                <div class=\"lot__info\">
+                    <span class=\"lot__category\">" . $category . "</span>
+                    <h3 class=\"lot__title\"><a class=\"text-link\" href=\"lot.html\">" . $name . "</a></h3>
+                    <div class=\"lot__state\">
+                        <div class=\"lot__rate\">
+                            <span class=\"lot__amount\">Стартовая цена</span>
+                            <span class=\"lot__cost\">" . formatNumber($price) . "<b class=\"rub\">р</b></span>
+                        </div>
+                        <div class=\"lot__timer timer\">
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+                  ");
+                  $index +=1;
+              }
+            ?>
+        <!--    <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="img/lot-1.jpg" width="350" height="260" alt="Сноуборд">
                 </div>
@@ -81,7 +180,7 @@ $user_avatar = 'img/user.jpg';
                         </div>
                     </div>
                 </div>
-            </li>
+            </li>  -->
         </ul>
     </section>
 </main>
@@ -89,6 +188,19 @@ $user_avatar = 'img/user.jpg';
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
+            <?php
+              $index = 0;
+              $num = count($categories);
+
+              while ($index < $num) {
+                  $category_name = $categories[$index];
+                  print ("
+                      <li class=\"nav__item\">
+                        <a href=\"all-lots.html\">" . $category_name . "</a>
+                      </li> ");
+                  $index += 1;
+              }
+            ?> <!--
             <li class="nav__item">
                 <a href="all-lots.html">Доски и лыжи</a>
             </li>
@@ -106,7 +218,7 @@ $user_avatar = 'img/user.jpg';
             </li>
             <li class="nav__item">
                 <a href="all-lots.html">Разное</a>
-            </li>
+            </li> -->
         </ul>
     </nav>
     <div class="main-footer__bottom container">
