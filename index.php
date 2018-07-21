@@ -1,5 +1,12 @@
 <?php
 
+$is_auth = (bool) rand(0, 1);
+
+$user_name = 'Константин';
+$user_avatar = 'img/user.jpg';
+
+$page_title = "Главная";
+
 $item1 = [
     "name" => "2014 Rossignol District Snowboard",
     "category" => "Доски и лыжи",
@@ -58,8 +65,10 @@ function formatNumber($number) {
 
 require "functions.php";
 
-$main_content = includeTemplate("index", $list, []);
-$layout = includeTemplate("layout", $categories, $main_content);
+$main_content = includeTemplate("index", array("list" => $list));
+$layout = includeTemplate("layout", array("category" => $categories,
+    "is_auth" => $is_auth, "user_name" => $user_name,
+    "user_avatar" => $user_avatar, "title" => $page_title, "main_content" => $main_content));
 
 print $layout;
 

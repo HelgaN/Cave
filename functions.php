@@ -1,5 +1,5 @@
 <?php
- function includeTemplate($name, $data_array, $param) {
+ function includeTemplate($name, $data_array) {
      if (file_exists("templates/" . $name . ".php")) {
          ob_start();
          extract($data_array);

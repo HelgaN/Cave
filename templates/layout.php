@@ -1,17 +1,8 @@
-<?php
-$is_auth = (bool) rand(0, 1);
-
-$user_name = 'Константин';
-$user_avatar = 'img/user.jpg';
-
-$page_title = "Главная";
-
-?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?= $page_title; ?></title>
+    <title><?= $data_array["title"]; ?></title>
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -31,12 +22,12 @@ $page_title = "Главная";
 
         <nav class="user-menu">
 
-            <?php if($is_auth): ?>
+            <?php if($data_array["is_auth"]): ?>
                 <div class="user-menu__image">
-                    <img src="<?= $user_avatar ?>" width="40" height="40" alt="Пользователь">
+                    <img src="<?= $data_array["user_avatar"] ?>" width="40" height="40" alt="Пользователь">
                 </div>
                 <div class="user-menu__logged">
-                    <p><?= $user_name ?></p>
+                    <p><?= $data_array["user_name"] ?></p>
                 </div>
             <?php endif; ?>
 
@@ -45,14 +36,14 @@ $page_title = "Главная";
 </header>
 
 <main class="container">
-    <?= $param; ?>
+    <?= $data_array["main_content"]; ?>
 </main>
 
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
             <?php
-            foreach ($data_array as $cat) {
+            foreach ($data_array["category"] as $cat) {
                 print ("<li class=\"nav__item\">
                         <a href=\"all-lots.html\">" . $cat . "</a>
                       </li> ");
