@@ -65,12 +65,27 @@ function formatNumber($number) {
 
 require "functions.php";
 
-$main_content = includeTemplate("index", array("list" => $list));
+date_default_timezone_set ( "Europe/Moscow");
+$rest_time = getRestTime();
+
+$main_content = includeTemplate("index", array("list" => $list, "rest_time" => $rest_time));
 $layout = includeTemplate("layout", array("category" => $categories,
     "is_auth" => $is_auth, "user_name" => $user_name,
     "user_avatar" => $user_avatar, "title" => $page_title, "main_content" => $main_content));
 
 print $layout;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

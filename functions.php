@@ -9,3 +9,14 @@
          return "";
      }
  };
+
+function getRestTime() {
+    $date = date("d/m/Y");
+    $date_array = explode("/", $date);
+    $next_day = $date_array[0] + 1;
+    $next_data = strtotime("$next_day.$date_array[1].$date_array[2]");
+    $real_time = time();
+    $lost_time = $next_data - $real_time;
+
+    return date("H:i", mktime(0, 0, $lost_time));
+};

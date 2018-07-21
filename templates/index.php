@@ -44,8 +44,7 @@
                             <span class=\"lot__amount\">Стартовая цена</span>
                             <span class=\"lot__cost\">" . formatNumber(strip_tags($item["price"])) . "<b class=\"rub\">р</b></span>
                         </div>
-                        <div class=\"lot__timer timer\">
-
+                        <div class=\"lot__timer timer\">" .$data_array["rest_time"]. "
                         </div>
                     </div>
                 </div>
