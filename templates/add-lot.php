@@ -18,7 +18,7 @@
       <input type="search" name="search" placeholder="Поиск лота">
       <input class="main-header__search-btn" type="submit" name="find" value="Найти">
     </form>
-    <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
+    <a class="main-header__add-lot button" href="add.php">Добавить лот</a>
     <nav class="user-menu">
       <ul class="user-menu__list">
         <li class="user-menu__item">
@@ -63,14 +63,14 @@
           print "form__item--invalid";
       } ?>"> <!-- form__item--invalid -->
         <label for="lot-name">Наименование</label>
-        <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" required>
+        <input id="lot-name" type="text" name="lot-name" value="<?=$_POST["lot-name"]?>" placeholder="Введите наименование лота" <!--required-->
         <span class="form__error">Введите наименование лота</span>
       </div>
       <div class="form__item <?php if($data_array["errors"]["category"] != null) {
           print "form__item--invalid";
       } ?>">
         <label for="category">Категория</label>
-        <select id="category" name="category" required>
+        <select id="category" name="category" <!--required-->
           <option>Выберите категорию</option>
           <option>Доски и лыжи</option>
           <option>Крепления</option>
@@ -86,7 +86,7 @@
         print "form__item--invalid";
     } ?>">
       <label for="message">Описание</label>
-      <textarea id="message" name="message" placeholder="Напишите описание лота" required></textarea>
+      <textarea id="message" name="message" placeholder="Напишите описание лота" <!--required--></textarea>
       <span class="form__error">Напишите описание лота</span>
     </div>
     <div class="form__item form__item--file"> <!-- form__item--uploaded -->
@@ -98,7 +98,7 @@
         </div>
       </div>
       <div class="form__input-file">
-        <input class="visually-hidden" type="file" id="photo2" value="">
+        <input class="visually-hidden" type="file" id="photo2" name="lot_img" value="">
         <label for="photo2">
           <span>+ Добавить</span>
         </label>
@@ -109,21 +109,21 @@
           print "form__item--invalid";
       } ?>">
         <label for="lot-rate">Начальная цена</label>
-        <input id="lot-rate" type="number" name="lot-rate" placeholder="0" required>
+        <input id="lot-rate" type="number" name="lot-rate"" value="<?=$_POST["lot-rate"]?>" placeholder="0" <!--required-->
         <span class="form__error">Введите начальную цену</span>
       </div>
       <div class="form__item form__item--small <?php if($data_array["errors"]["lot-step"] != null) {
           print "form__item--invalid";
       } ?>">
         <label for="lot-step">Шаг ставки</label>
-        <input id="lot-step" type="number" name="lot-step" placeholder="0" required>
+        <input id="lot-step" type="number" name="lot-step" value="<?=$_POST["lot-step"]?>" placeholder="0" <!--required-->
         <span class="form__error">Введите шаг ставки</span>
       </div>
       <div class="form__item <?php if($data_array["errors"]["lot-date"] != null) {
           print "form__item--invalid";
       } ?>">
         <label for="lot-date">Дата окончания торгов</label>
-        <input class="form__input-date" id="lot-date" type="date" name="lot-date" required>
+        <input class="form__input-date" id="lot-date" type="date" name="lot-date" value="<?=$_POST["lot-date"]?>" <!--required-->
         <span class="form__error">Введите дату завершения торгов</span>
       </div>
     </div>

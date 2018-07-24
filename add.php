@@ -1,5 +1,6 @@
 <?php
 require_once("functions.php");
+require_once ("list.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lot = $_POST;
@@ -13,12 +14,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    if((int)$_POST["lot-rate"] !== number) {
+    if(is_numeric($_POST["lot-rate"]) == false) {
         $errors["lot-rate"] = "Можно вводить только цифры";
     }
 
-    if((int)$_POST["lot-step"] !== number) {
+    if(is_numeric($_POST["lot-step"]) == false) {
         $errors["lot-step"] = "Можно вводить только цифры";
+    }
+
+    if($_POST["category"] == "Выберите категорию") {    // протестить
+        $errors["category"] = "Необходимо выбрать подходящуб категорию";
     }
 
     if (isset($_FILES["lot_img"]["name"])) {
@@ -27,12 +32,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);   // возвращает mime-тип
         $file_type = finfo_file($finfo, $tmp_name);        // возвращает тип-файла
-        if ($file_type !== "image/jpeg" || $file_type !== "image/png") {
+
+        if ($file_type != "image/jpeg" && $file_type != "image/png") {
             $errors["file"] = "Загрузите картинку в формате PNG, JPG или JPEG";
         }
         else {
-            move_uploaded_file($tmp_name, "uploads/" . $path);
-            $lot["path"] = $path;
+            move_uploaded_file($tmp_name, "img/" . $path);
+            $lot["url"] = $path;
         }
     }
     else {
@@ -42,14 +48,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (count($errors)) {
         $page_content = includeTemplate("add-lot", ["lot" => $lot, "form-invalid" => "form--invalid",
             "errors" => $errors/*, 'dict' => $dict*/]);
-        print $page_content;
     }
     else {
-        $page_content = includeTemplate("lot.php", ["lot" => $lot]); //!!! сделать шаблон!!!
+        $item = [
+            "name" => $lot["lot-name"],
+            "category" => $lot["category"],
+            "price" => $lot["lot-rate"],
+            "url" => "img/".$_FILES["lot_img"]["name"],
+            "desc" => $lot["message"]
+        ];
+        array_push($list, $item);
+        $num = count($list);
+        $page_content = includeTemplate("lot", ["list" => $list, "index" => $num]);
+        print $page_content;
     }
 }
 else {
-    $page_content = includeTemplate("add-lot", []);
+    $page_content = includeTemplate("add-lot", []);     // изначальная загрузка страницы
     print $page_content;
 }
 
@@ -59,4 +74,4 @@ else {
     "title"      => 'GifTube - Добавление гифки'
 ]);
 
-/*print($layout_content);*/
+print($layout_content);*/
