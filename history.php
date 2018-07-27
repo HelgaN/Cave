@@ -1,5 +1,6 @@
 <?php
 require_once "functions.php";
+require_once "list.php"; 
 
 $title = "История просмотров";
 if(isset($_COOKIE["lots"])){
@@ -8,5 +9,6 @@ if(isset($_COOKIE["lots"])){
     $data = false;
 }
 
-$page_content = includeTemplate("all-lots", array("title" => $title, "data" => $data));
+$history = includeTemplate("all-lots", array("title" => $title, "data" => $data));
+$page_content = includeTemplate("layout", ["category" => $categories, "main_content" => $history]);
 print $page_content;

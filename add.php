@@ -59,19 +59,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ];
         array_push($list, $item);
         $num = count($list);
-        $page_content = includeTemplate("lot", ["list" => $list, "index" => $num]);
-        print $page_content;
+        $lot_content = includeTemplate("lot", ["list" => $list, "index" => $num]);
+        $page_content = includeTemplate("layout", ["category" => $categories, "main_content" => $lot_content]);
     }
 }
 else {
-    $page_content = includeTemplate("add-lot", []);     // изначальная загрузка страницы
-    print $page_content;
+    $add_lot = includeTemplate("add-lot", []);
+    $page_content = includeTemplate("layout", ["category" => $categories, "main_content" => $add_lot]);     // изначальная загрузка страницы
+
 }
 
-/*$layout_content = includeTemplate("layout", [
-    "main_content" => $page_content, []
-    "categories" => [],
-    "title"      => 'GifTube - Добавление гифки'
-]);
+print $page_content;
 
-print($layout_content);*/

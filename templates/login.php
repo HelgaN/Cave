@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?= $data_array["title"]; ?></title>
+    <title>Вход</title>
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
@@ -11,33 +11,15 @@
 <header class="main-header">
     <div class="main-header__container container">
         <h1 class="visually-hidden">YetiCave</h1>
-        <?php if(preg_match("/index.php$/", $_SERVER["REQUEST_URI"])) : ?>
-         <a class="main-header__logo">
-             <img src="img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
-         </a>
-        <?php else : ?>
-        <a class="main-header__logo" href="index.php">
+        <a class="main-header__logo" href="index.html">
             <img src="img/logo.svg" width="160" height="39" alt="Логотип компании YetiCave">
         </a>
-        <? endif; ?>
-
         <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru">
             <input type="search" name="search" placeholder="Поиск лота">
             <input class="main-header__search-btn" type="submit" name="find" value="Найти">
         </form>
-        <a class="main-header__add-lot button" href="add.php">Добавить лот</a>
-
+        <a class="main-header__add-lot button" href="add-lot.html">Добавить лот</a>
         <nav class="user-menu">
-
-            <?php if($data_array["is_auth"]): ?>
-                <div class="user-menu__image">
-                    <img src="<?= $data_array["user_avatar"] ?>" width="40" height="40" alt="Пользователь">
-                </div>
-                <div class="user-menu__logged">
-                    <p><?= $data_array["user_name"] ?></p>
-                </div>
-            <?php endif; ?>
-
             <ul class="user-menu__list">
                 <li class="user-menu__item">
                     <a href="sign-up.html">Регистрация</a>
@@ -46,34 +28,75 @@
                     <a href="login.html">Вход</a>
                 </li>
             </ul>
-
         </nav>
     </div>
 </header>
 
-<?php if(preg_match("/index.php$/", $_SERVER["REQUEST_URI"])) : ?>
-<main class="container">
-    <?php else : ?>
-    <main\>
-    <? endif ?>
-    <?= $data_array["main_content"]; ?>
+<main>
+    <nav class="nav">
+        <ul class="nav__list container">
+            <li class="nav__item">
+                <a href="all-lots.html">Доски и лыжи</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Крепления</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Ботинки</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Одежда</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Инструменты</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Разное</a>
+            </li>
+        </ul>
+    </nav>
+    <form class="form container" action="https://echo.htmlacademy.ru" method="post"> <!-- form--invalid -->
+        <h2>Вход</h2>
+        <div class="form__item"> <!-- form__item--invalid -->
+            <label for="email">E-mail*</label>
+            <input id="email" type="text" name="email" placeholder="Введите e-mail" required>
+            <span class="form__error">Введите e-mail</span>
+        </div>
+        <div class="form__item form__item--last">
+            <label for="password">Пароль*</label>
+            <input id="password" type="text" name="password" placeholder="Введите пароль" required>
+            <span class="form__error">Введите пароль</span>
+        </div>
+        <button type="submit" class="button">Войти</button>
+    </form>
 </main>
 
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <?php
-            foreach ($data_array["category"] as $cat) {
-                print ("<li class=\"nav__item\">
-                        <a href=\"all-lots.html\">" . $cat . "</a>
-                      </li> ");
-              }
-            ?>
+            <li class="nav__item">
+                <a href="all-lots.html">Доски и лыжи</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Крепления</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Ботинки</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Одежда</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Инструменты</a>
+            </li>
+            <li class="nav__item">
+                <a href="all-lots.html">Разное</a>
+            </li>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
         <div class="main-footer__copyright">
-            <p>© 2018, YetiCave</p>
+            <p>© 2017, YetiCave</p>
             <p>Интернет-аукцион сноубордического и горнолыжного снаряжения</p>
         </div>
         <div class="main-footer__social social">
@@ -110,4 +133,3 @@
 
 </body>
 </html>
-
