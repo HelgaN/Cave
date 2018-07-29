@@ -1,6 +1,7 @@
 <?php
 require_once("functions.php");
 require_once ("list.php");
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lot = $_POST;
@@ -65,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 else {
     $add_lot = includeTemplate("add-lot", []);
-    $page_content = includeTemplate("layout", ["category" => $categories, "main_content" => $add_lot]);     // изначальная загрузка страницы
+    $page_content = includeTemplate("layout", ["category" => $categories, "main_content" => $add_lot, "user_name" => $_SESSION["user"]["name"]]);     // изначальная загрузка страницы
 
 }
 

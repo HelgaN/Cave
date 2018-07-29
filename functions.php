@@ -1,4 +1,6 @@
 <?php
+ require_once "userdata.php";
+
  function includeTemplate($name, $data_array) {
      if (file_exists("templates/" . $name . ".php")) {
          ob_start();
@@ -20,3 +22,17 @@ function getRestTime() {
 
     return date("H:i", mktime(0, 0, $lost_time));
 };
+
+function searchUserByEmail($email, $users_array) {
+    $user = false;
+    foreach ($users_array as $key) {
+        $num = $key;
+        foreach ($num as $key_inner => $value) {
+            if ($value == $email) {
+                $user = $num;
+            }
+        }
+    }
+    return $user;
+};
+

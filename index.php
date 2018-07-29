@@ -1,4 +1,7 @@
 <?php
+session_start();
+
+$user_name = $_SESSION["user"]["name"];
 
 /*$is_auth = (bool) rand(0, 1);
 $user_name = 'Константин';

@@ -69,6 +69,13 @@
                     равнодушным.--> $desc</p>
             </div>
             <div class=\"lot-item__right\">
+            ");
+   }
+
+   if($index - 1 <= count($data_array["list"]) && $_SESSION["user"]) {
+
+       print ("
+       
                 <div class=\"lot-item__state\">
                     <div class=\"lot-item__timer timer\">
                         10:54:12
@@ -90,6 +97,11 @@
                         <button type=\"submit\" class=\"button\">Сделать ставку</button>
                     </form>
                 </div>
+                ");
+       }    if($index - 1 <= count($data_array["list"])) {
+
+       print ("  
+       
                 <div class=\"history\">
                     <h3>История ставок (<span>10</span>)</h3>
                     <table class=\"history__list\">

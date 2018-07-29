@@ -29,29 +29,32 @@
 
         <nav class="user-menu">
 
-            <?php if($data_array["is_auth"]): ?>
+            <?php if(isset($data_array["user_name"])/*$data_array["is_auth"]*/): ?>
                 <div class="user-menu__image">
                     <img src="<?= $data_array["user_avatar"] ?>" width="40" height="40" alt="Пользователь">
                 </div>
                 <div class="user-menu__logged">
                     <p><?= $data_array["user_name"] ?></p>
+                    <a href="logout.php">Выход</a>
                 </div>
-            <?php endif; ?>
+            <? else : ?>
 
             <ul class="user-menu__list">
                 <li class="user-menu__item">
                     <a href="sign-up.html">Регистрация</a>
                 </li>
                 <li class="user-menu__item">
-                    <a href="login.html">Вход</a>
+                    <a href="login.php">Вход</a>
                 </li>
             </ul>
+            <? endif; ?>
 
         </nav>
     </div>
 </header>
 
 <?php if(preg_match("/index.php$/", $_SERVER["REQUEST_URI"])) : ?>
+
 <main class="container">
     <?php else : ?>
     <main\>
