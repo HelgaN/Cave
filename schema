@@ -1,0 +1,70 @@
+DROP DATABASE yeticave;
+
+CREATE DATABASE yeticave DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci; USE yeticave;
+CREATE TABLE categories (
+ category_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ name CHAR(255) NOT NULL
+);
+CREATE TABLE lots (
+ lot_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ category_id INT UNSIGNED NOT NULL,
+ user_id_seller INT UNSIGNED NOT NULL,
+ user_id_buyer INT UNSIGNED,
+ dt_add datetime,
+ title CHAR(255) NOT NULL,
+ description TEXT,
+ img_path CHAR(255),
+ start_price INT UNSIGNED NOT NULL,
+ dt_end datetime,
+ step CHAR(255) NOT NULL,
+ fav_count INT UNSIGNED
+ /* FOREIGN KEY (user_id_seller) REFERENCES users(id),
+  FOREIGN KEY (user_id_buyer) REFERENCES users(id),
+  FOREIGN KEY (category_id) REFERENCES categories(id)*/
+);
+CREATE TABLE bets (
+ bet_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ dt_bet datetime,
+ cost INT UNSIGNED NOT NULL,
+ user_id_buyer INT UNSIGNED NOT NULL,
+ lot_id INT UNSIGNED NOT NULL
+/*  FOREIGN KEY (user_id_buyer) REFERENCES users(id),
+  FOREIGN KEY (lot_id) REFERENCES lots(id)*/
+);
+CREATE TABLE users (
+ user_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ user_lots INT UNSIGNED,
+ user_bets INT UNSIGNED,
+ dt_reg datetime,
+ email CHAR(128) NOT NULL,
+ name CHAR(128) NOT NULL, PASSWORD CHAR(64) NOT NULL,
+ avatar_path CHAR(255)
+/*  FOREIGN KEY (user_lots) REFERENCES bets(id),
+  FOREIGN KEY (user_bets) REFERENCES bets(id)*/
+);
+CREATE UNIQUE INDEX index_email ON users(email);
+CREATE INDEX index_title ON lots(title);
+
+ALTER TABLE bets
+ADD FOREIGN KEY (lot_id) REFERENCES lots(lot_id);
+
+ALTER TABLE users
+ADD FOREIGN KEY (user_lots) REFERENCES bets(bet_id);
+
+ALTER TABLE users
+ADD FOREIGN KEY (user_bets) REFERENCES bets(bet_id);
+
+ALTER TABLE lots
+  ADD FOREIGN KEY (user_id_seller) REFERENCES users(user_id);
+
+ALTER TABLE lots
+  ADD FOREIGN KEY (user_id_buyer) REFERENCES users(user_id);
+
+ALTER TABLE lots
+  ADD FOREIGN KEY (category_id) REFERENCES categories(category_id);
+
+
+
+
+
+
