@@ -37,7 +37,8 @@ CREATE TABLE users (
  user_bets INT UNSIGNED,
  dt_reg datetime,
  email CHAR(128) NOT NULL,
- name CHAR(128) NOT NULL, PASSWORD CHAR(64) NOT NULL,
+ name CHAR(128) NOT NULL,
+ password CHAR(64) NOT NULL,
  avatar_path CHAR(255)
 /*  FOREIGN KEY (user_lots) REFERENCES bets(id),
   FOREIGN KEY (user_bets) REFERENCES bets(id)*/
@@ -62,6 +63,8 @@ ALTER TABLE lots
 
 ALTER TABLE lots
   ADD FOREIGN KEY (category_id) REFERENCES categories(category_id);
+
+
 
 
 
