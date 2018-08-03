@@ -2,6 +2,7 @@
 require_once "functions.php";
 require_once "list.php";
 require_once "userdata.php";
+require_once "connection.php";
 
 $page_content = includeTemplate("login", []);
 
@@ -18,12 +19,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    $user = searchUserByEmail($form["email"], $users);
+    $email = $form["email"];
+
+    $sql = "SELECT email, password, name FROM users WHERE email = \"$email\"";
+    $result = mysqli_query($conn, $sql);
+    $user = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    /*$user = searchUserByEmail($form["email"], $users);*/
+   /// print (($user[0]["email"])); данные БД///
 
     if (!count($errors) && $user) {
 
-        if (password_verify($form["password"], $user["password"]) /*$form["password"] == $user["password"]*/) {
-            $_SESSION["user"] = $user;     //!!! авторизация ломает history/lot
+        if (password_verify($form["password"], $user[0]["password"]) /*$form["password"] == $user["password"]*/) {
+            $_SESSION["user"] = $user[0]["name"];     //!!! авторизация ломает history/lot
         }
         else {
             $errors["password"] = "Вы ввели неверный пароль";

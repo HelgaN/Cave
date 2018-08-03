@@ -29,6 +29,6 @@ $path = "/";
 setcookie($name, serialize($array), $expire, $path);
 
 $page_lot = includeTemplate("lot", array("list" => $list));
-$page_content = includeTemplate("layout", array("category" => $categories,"main_content" => $page_lot, "user_name" => $_SESSION["user"]["name"]));
+$page_content = includeTemplate("layout", array("category" => $categories,"main_content" => $page_lot, "user_name" => $_SESSION["user"]/*$_SESSION["user"]["name"]*/));
 print $page_content;
 

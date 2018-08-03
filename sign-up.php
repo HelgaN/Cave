@@ -65,6 +65,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $error = mysqli_error($conn); // возвращает последнюю ошибку //
             print ("Ошибка MySQL: " . $error);
         }
+        session_start();
+        $_SESSION["message"] = "Теперь вы можете войти, используя свой email и пароль";
         header("Location: ../index.php");
         exit();
     }
