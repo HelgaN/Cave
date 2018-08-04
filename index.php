@@ -29,7 +29,7 @@ require "functions.php";
 date_default_timezone_set ( "Europe/Moscow");
 $rest_time = getRestTime();
 
-$main_content = includeTemplate("index", array("list" => $list, "rest_time" => $rest_time));
+$main_content = includeTemplate("index", array("list" => $list, "rest_time" => $rest_time, "categories" => $categories));
 
 $layout = includeTemplate("layout", array("category" => $categories,
     "is_auth" => $is_auth, "user_name" => $user_name,

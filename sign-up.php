@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $email = $form["email"];
     $name = $form["name"];
-    $password = $form["password"];
+    $password = password_hash($form["password"], PASSWORD_DEFAULT);
 
     if(isset($email)) {
         $sql = "SELECT email FROM users";
