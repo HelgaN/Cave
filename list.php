@@ -2,7 +2,7 @@
 
 require_once "connection.php";
 
-$sql_l = "SELECT * FROM lots WHERE dt_end is NULL ORDER BY dt_add DESC";
+$sql_l = "SELECT * FROM lots ORDER BY dt_add ASC";/*"SELECT * FROM lots WHERE dt_end is NULL ORDER BY dt_add DESC";*/
 $result_l = mysqli_query($conn, $sql_l);
 $list = mysqli_fetch_all($result_l, MYSQLI_ASSOC);
 

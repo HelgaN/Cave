@@ -13,17 +13,6 @@ $user_name = 'Константин';
 $user_avatar = 'img/user.jpg';*/
 $page_title = "Главная";
 require "list.php";
-
-function formatNumber($number) {     // дубль в lot.php (template)
-    $num = ceil($number);
-    if ($num > 1000) {
-        $num = number_format($num, 0, ".", " ");
-    }
-
-    $num . "&#8399";
-    return $num;
-};
-
 require "functions.php";
 
 date_default_timezone_set ( "Europe/Moscow");

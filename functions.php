@@ -36,3 +36,13 @@ function searchUserByEmail($email, $users_array) {
     return $user;
 };
 
+function formatNumber($number) {
+    $num = ceil($number);
+    if ($num > 1000) {
+        $num = number_format($num, 0, ".", " ");
+    }
+
+    $num . "&#8399";
+    return $num;
+};
+

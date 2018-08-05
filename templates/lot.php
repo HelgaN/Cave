@@ -21,7 +21,7 @@
         </ul>
     </nav>
    <?php
-
+/*
    function formatNumber($number) {
        $num = ceil($number);
        if ($num > 1000) {
@@ -33,9 +33,13 @@
    };
 
    $index = [$_GET][0]["id"];
+
    if($_POST) {
        $index = count($data_array["list"]);
    }
+
+
+
    $title = $data_array["list"][$index - 1]["name"];
    $img = $data_array["list"][$index - 1]["url"];
    $category = $data_array["list"][$index - 1]["category"];
@@ -44,8 +48,8 @@
    $price_format = formatNumber($price);
    $min_price = $price + 1;
    $min_price_format = formatNumber($min_price);
-
-   if($index - 1 <= count($data_array["list"])) {
+*/
+   if($index - 1 <= count($list)) {
 
     print ("
    
@@ -83,22 +87,22 @@
                     <div class=\"lot-item__cost-state\">
                         <div class=\"lot-item__rate\">
                             <span class=\"lot-item__amount\">Текущая цена</span>
-                            <span class=\"lot-item__cost\">$price_format</span>
+                            <span class=\"lot-item__cost\">$price</span>
                         </div>
                         <div class=\"lot-item__min-cost\">
-                            Мин. ставка <span>$min_price_format</span>
+                            Мин. ставка <span>$min_price</span>
                         </div>
                     </div>
                     <form class=\"lot-item__form\" action=\"https://echo.htmlacademy.ru\" method=\"post\">
                         <p class=\"lot-item__form-item\">
                             <label for=\"cost\">Ваша ставка</label>
-                            <input id=\"cost\" type=\"number\" name=\"cost\" placeholder=\"$min_price_format\">
+                            <input id=\"cost\" type=\"number\" name=\"cost\" placeholder=\"$min_price\">
                         </p>
                         <button type=\"submit\" class=\"button\">Сделать ставку</button>
                     </form>
                 </div>
                 ");
-       }    if($index - 1 <= count($data_array["list"])) {
+       }    if($index - 1 <= count($list)) {
 
        print ("  
        

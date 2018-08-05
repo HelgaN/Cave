@@ -29,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (file_exists($_FILES["lot_img"]["name"])) {
-        print (($_FILES["lot_img"]["name"]));
         $tmp_name = $_FILES["lot_img"]["tmp_name"];
         $path = $_FILES["lot_img"]["name"];
 
@@ -94,8 +93,12 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         mysqli_stmt_bind_param($stmt, "sssssssssss", $id_category, $value_id, $null, $time_start, $name_item, $desc_item, $url_item, $price_item, $time_end, $step_item, $null);
         mysqli_stmt_execute($stmt);
 
-        $lot_content = includeTemplate("lot", ["list" => $list, "index" => $num]);
-        $page_content = includeTemplate("layout", ["category" => $categories, "main_content" => $lot_content]);
+        header ("Location: lot.php");
+        exit;
+
+
+        /*$lot_content = includeTemplate("lot", ["list" => $list, "index" => $num]);
+        $page_content = includeTemplate("layout", ["category" => $categories, "main_content" => $lot_content]);*/
     }
 }
 else {
