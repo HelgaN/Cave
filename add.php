@@ -20,15 +20,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors["lot-rate"] = "Можно вводить только цифры";
     }
 
-    if(is_numeric($_POST["lot-step"]) == false) {
-        $errors["lot-step"] = "Можно вводить только цифры";
+    if($_POST["lot-rate"] <= 0) {
+        $errors["lot-rate"] = "Содержимое поля «начальная цена» должно быть числом больше нуля";
+    }
+
+    if(is_numeric($_POST["lot-step"]) == false || $_POST["lot-step"] <= 0) {
+        $errors["lot-step"] = "Можно вводить только целые цифры больше 0";
     }
 
     if($_POST["category"] == "Выберите категорию") {    // протестить
         $errors["category"] = "Необходимо выбрать подходящуб категорию";
     }
 
-    if (file_exists($_FILES["lot_img"]["name"])) {
+    if (isset($_FILES["lot_img"]["name"]) && $_FILES["lot_img"]["name"] != "") {  // при отсутствии 2го условия - ошибка
         $tmp_name = $_FILES["lot_img"]["tmp_name"];
         $path = $_FILES["lot_img"]["name"];
 
@@ -45,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }/*
     else {
         $errors["file"] = "Вы не загрузили файл";
-    }  Уточнить обязательно ли загружать фото */
+    }  /*Уточнить обязательно ли загружать фото */
 
     if (count($errors)) {
         $page_errors = includeTemplate("add-lot", ["lot" => $lot, "form-invalid" => "form--invalid",
@@ -93,7 +97,9 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         mysqli_stmt_bind_param($stmt, "sssssssssss", $id_category, $value_id, $null, $time_start, $name_item, $desc_item, $url_item, $price_item, $time_end, $step_item, $null);
         mysqli_stmt_execute($stmt);
 
-        header ("Location: lot.php");
+        $id_num = count($list) + 1;  // id текущего лота
+
+        header ("Location: lot.php?id=$id_num");
         exit;
 
 

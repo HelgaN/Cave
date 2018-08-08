@@ -21,7 +21,7 @@
         </a>
         <? endif; ?>
         <?php print("<p style='position: absolute; display: block; width: 400px; margin: 0; top: 0; left: 55%'>".$data_array["message"]."</p>") ?>
-        <form class="main-header__search" method="get" action="https://echo.htmlacademy.ru">
+        <form class="main-header__search" method="get" action="search.php">
             <input type="search" name="search" placeholder="Поиск лота">
             <input class="main-header__search-btn" type="submit" name="find" value="Найти">
         </form>

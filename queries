@@ -35,16 +35,14 @@ INSERT INTO bets(bet_id, dt_bet, cost, user_id_buyer, lot_id) VALUE (2, now(), "
 SELECT name FROM categories;
 SELECT * FROM lots WHERE dt_end is NULL ORDER BY dt_add DESC; /* возможно, нужна доработка*/
 
-SELECT title, name FROM lots, categories WHERE lot_id = 3, lots.category_id = categories.category_id;
-
 SELECT lots.title, categories.name
 FROM lots
 INNER JOIN categories ON lots.category_id = categories.category_id
 WHERE lots.lot_id = 2;  /* id=2 условно*/
-
+/*
 UPDATE lots SET title = "Обновлено!"
 WHERE lot_id = 1;
-
+перезапись */
 SELECT *
 FROM bets
 INNER JOIN lots ON bets.lot_id = lots.category_id
